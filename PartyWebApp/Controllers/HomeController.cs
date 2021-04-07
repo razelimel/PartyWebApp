@@ -9,7 +9,6 @@ using PartyWebApp.Models;
 
 namespace PartyWebApp.Controllers
 {
-    //git test
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
