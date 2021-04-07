@@ -16,6 +16,7 @@ namespace PartyWebApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //omer
         }
 
         public IConfiguration Configuration { get; }
