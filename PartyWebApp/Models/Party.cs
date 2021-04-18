@@ -8,7 +8,7 @@ namespace PartyWebApp.Models
 {
     public class Party
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string name { get; set; }
         public decimal price { get; set; }
         [DataType(DataType.Date)]
