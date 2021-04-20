@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PartyWebApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace PartyWebApp
 {
@@ -24,6 +26,9 @@ namespace PartyWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<PartyWebAppContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("PartyWebAppContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
