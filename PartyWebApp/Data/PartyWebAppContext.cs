@@ -15,5 +15,7 @@ namespace PartyWebApp.Data
          }
 
         public DbSet<Party> Party { get; set; }
+
+        public DbSet<PartyWebApp.Models.Performer> Performer { get; set; }
     }
 }

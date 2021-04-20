@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PartyWebApp.Models.Performer>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card text-white bg-dark bg-gradient mb-3" style="width: 18rem;">
+                    <img height="300" src=@Html.DisplayFor(modelItem => item.imageUrl)
+                         class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Html.DisplayFor(modelItem => item.firstName)
+                            @Html.DisplayFor(modelItem => item.lastName)
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            @Html.DisplayFor(modelItem => item.genre)
+                        </h6>
+                        <p class="card-text">
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </p>
+                    </div>
+                    <div class="card-footer d-grid gap-2">
+                        <a asp-action="Details" class="btn btn-light btn-lg" asp-route-id="@item.Id">More</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
