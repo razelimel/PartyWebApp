@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PartyWebApp.Data;
 
 namespace PartyWebApp.Migrations
 {
     [DbContext(typeof(PartyWebAppContext))]
-    partial class PartyWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210430082753_newView")]
+    partial class newView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,8 +96,20 @@ namespace PartyWebApp.Migrations
                     b.Property<int?>("PartyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SpotifyId")
+                    b.Property<string>("firstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("genre")
+                        .HasColumnType("int");
+
+                    b.Property<string>("imageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("rating")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

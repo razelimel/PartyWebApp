@@ -3,21 +3,55 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PartyWebApp.Data;
 
 namespace PartyWebApp.Migrations
 {
     [DbContext(typeof(PartyWebAppContext))]
-    partial class PartyWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210427125215_InitialCreat")]
+    partial class InitialCreat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("PartyWebApp.Models.Attendee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PartyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("birthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PartyId");
+
+                    b.ToTable("Attendee");
+                });
 
             modelBuilder.Entity("PartyWebApp.Models.Club", b =>
                 {
@@ -68,14 +102,8 @@ namespace PartyWebApp.Migrations
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("price")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("startTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ticketsCounter")
-                        .HasColumnType("int");
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -94,14 +122,33 @@ namespace PartyWebApp.Migrations
                     b.Property<int?>("PartyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SpotifyId")
+                    b.Property<string>("firstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("genre")
+                        .HasColumnType("int");
+
+                    b.Property<string>("imageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("rating")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PartyId");
 
                     b.ToTable("Performer");
+                });
+
+            modelBuilder.Entity("PartyWebApp.Models.Attendee", b =>
+                {
+                    b.HasOne("PartyWebApp.Models.Party", null)
+                        .WithMany("attendees")
+                        .HasForeignKey("PartyId");
                 });
 
             modelBuilder.Entity("PartyWebApp.Models.Party", b =>
