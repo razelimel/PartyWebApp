@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PartyWebApp.Data;
 using Microsoft.EntityFrameworkCore;
+using PartyWebApp.Services;
 
 namespace PartyWebApp
 {
@@ -29,6 +30,8 @@ namespace PartyWebApp
 
             services.AddDbContext<PartyWebAppContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PartyWebAppContext")));
+
+            services.AddTransient<ISpotifyClientService, SpotifyClientService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

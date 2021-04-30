@@ -10,8 +10,8 @@ using PartyWebApp.Data;
 namespace PartyWebApp.Migrations
 {
     [DbContext(typeof(PartyWebAppContext))]
-    [Migration("20210420132321_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210427121929_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,20 +122,8 @@ namespace PartyWebApp.Migrations
                     b.Property<int?>("PartyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("firstName")
+                    b.Property<string>("SpotifyId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("genre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("imageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("rating")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

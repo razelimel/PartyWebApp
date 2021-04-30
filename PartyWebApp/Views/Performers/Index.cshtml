@@ -12,26 +12,22 @@
 </p>
 <div class="container">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-        @foreach (var item in Model)
+        @foreach (var performer in Model)
         {
             <div class="col">
                 <div class="card text-white bg-dark bg-gradient mb-3" style="width: 18rem;">
-                    <img height="300" src=@Html.DisplayFor(modelItem => item.imageUrl)
+                    <img height="300" src=@Html.DisplayFor(modelItem => performer.SpotifyArtistObj.Images.First().Url)
                          class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">
-                            @Html.DisplayFor(modelItem => item.firstName)
-                            @Html.DisplayFor(modelItem => item.lastName)
+                            @Html.DisplayFor(modelItem => performer.SpotifyArtistObj.Name)
                         </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            @Html.DisplayFor(modelItem => item.genre)
-                        </h6>
                         <p class="card-text">
-                            @Html.DisplayFor(modelItem => item.rating)
+                            @Html.DisplayFor(modelItem => performer.SpotifyArtistObj.Followers.Total)
                         </p>
                     </div>
                     <div class="card-footer d-grid gap-2">
-                        <a asp-action="Details" class="btn btn-light btn-lg" asp-route-id="@item.Id">More</a>
+                        <a asp-action="Details" class="btn btn-light btn-lg" asp-route-id="@performer.SpotifyId">More</a>
                     </div>
                 </div>
             </div>

@@ -2,39 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SpotifyAPI.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PartyWebApp.Data;
 using PartyWebApp.Models;
+using PartyWebApp.Services;
 
 namespace PartyWebApp.Controllers
 {
     public class PerformersController : Controller
     {
         private readonly PartyWebAppContext _context;
+        private readonly ISpotifyClientService _spotifyClientService;
 
-        public PerformersController(PartyWebAppContext context)
+        public PerformersController(PartyWebAppContext context, ISpotifyClientService spotifyClientService)
         {
             _context = context;
+            _spotifyClientService = spotifyClientService;
+
         }
 
         // GET: Performers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Performer.ToListAsync());
+            var performersDTO = await _context.Performer.ToListAsync();
+            var performers = await _spotifyClientService.GetArtists(performersDTO);
+            return View(performers);
         }
 
         // GET: Performers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            var performer = await _spotifyClientService.GetArtist(new Performer { SpotifyId = id });
 
-            var performer = await _context.Performer
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (performer == null)
             {
                 return NotFound();
@@ -54,63 +60,12 @@ namespace PartyWebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,firstName,lastName,genre,rating,imageUrl")] Performer performer)
+        public async Task<IActionResult> Create([Bind("Id,SpotifyId")] Performer performer)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(performer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(performer);
-        }
-
-        // GET: Performers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var performer = await _context.Performer.FindAsync(id);
-            if (performer == null)
-            {
-                return NotFound();
-            }
-            return View(performer);
-        }
-
-        // POST: Performers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,firstName,lastName,genre,rating,imageUrl")] Performer performer)
-        {
-            if (id != performer.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(performer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PerformerExists(performer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(performer);

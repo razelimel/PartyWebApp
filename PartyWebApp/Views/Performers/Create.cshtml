@@ -15,30 +15,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="firstName" class="control-label">First Name</label>
-                <input asp-for="firstName" class="form-control" />
-                <span asp-validation-for="firstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="lastName" class="control-label">Last Name</label>
-                <input asp-for="lastName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="genre" class="control-label">Genre</label>
-                <select asp-for="genre" class="form-control" asp-items="Html.GetEnumSelectList<Genre>()">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-                <span asp-validation-for="genre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="rating" class="control-label">Rating</label>
-                <input asp-for="rating" class="form-control" />
-                <span asp-validation-for="rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="imageUrl" class="control-label">Profile Image</label>
-                <input asp-for="imageUrl" class="form-control" />
-                <span asp-validation-for="imageUrl" class="text-danger"></span>
+                <label asp-for="SpotifyId" class="control-label">Spotify Artist Id</label>
+                <input asp-for="SpotifyId" class="form-control" />
+                <span asp-validation-for="SpotifyId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
