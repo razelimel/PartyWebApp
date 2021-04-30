@@ -120,20 +120,8 @@ namespace PartyWebApp.Migrations
                     b.Property<int?>("PartyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("firstName")
+                    b.Property<string>("SpotifyId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("genre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("imageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("rating")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

@@ -5,45 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
 
+    <div>
+        <div class="container-fluid">
+            <img height="240" src=@Html.DisplayFor(modelItem => Model.SpotifyArtistObj.Images.First().Url) alt="...">
+            <div class="position-absolute bottom-0 start-0">
+                <h1>@Html.DisplayFor(modelItem => Model.SpotifyArtistObj.Name)</h1>
+                <h6 class="text-muted">Followers: @Html.DisplayFor(model => model.SpotifyArtistObj.Followers.Total)</h6>
+            </div>
+        </div>
+    </div>
 <div>
-    <h4>Performer</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.firstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.firstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.lastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.lastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.genre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.rating)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.rating)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.imageUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.imageUrl)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
     <a asp-action="Index">Back to List</a>
 </div>
