@@ -20,9 +20,16 @@ namespace PartyWebApp.Controllers
         }
 
         // GET: Parties
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Party.ToListAsync());
+            var parties = from p in _context.Party
+                         select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                parties = parties.Where(s => s.name.Contains(searchString));
+            }
+            return View(await parties.ToListAsync());
         }
 
         // GET: Parties/Details/5
@@ -54,7 +61,7 @@ namespace PartyWebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,name,price,eventDate,genre,minimalAge")] Party party)
+        public async Task<IActionResult> Create([Bind("Id,name,price,eventDate,genre,minimalAge,performers,ticketsCounter,club,imageUrl")] Party party)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +93,7 @@ namespace PartyWebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,name,price,eventDate,genre,minimalAge")] Party party)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,name,price,eventDate,genre,minimalAge,performers,ticketsCounter,club,imageUrl")] Party party)
         {
             if (id != party.Id)
             {

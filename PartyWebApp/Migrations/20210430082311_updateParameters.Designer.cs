@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PartyWebApp.Data;
 
 namespace PartyWebApp.Migrations
 {
     [DbContext(typeof(PartyWebAppContext))]
-    partial class PartyWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210430082311_updateParameters")]
+    partial class updateParameters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,8 +70,8 @@ namespace PartyWebApp.Migrations
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("startTime")
                         .HasColumnType("datetime2");
