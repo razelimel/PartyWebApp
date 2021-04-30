@@ -20,14 +20,14 @@ namespace PartyWebApp.Controllers
         }
 
         // GET: Parties
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchPartyName)
         {
             var parties = from p in _context.Party
                          select p;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchPartyName))
             {
-                parties = parties.Where(s => s.name.Contains(searchString));
+                parties = parties.Where(s => s.name.Contains(searchPartyName));
             }
             return View(await parties.ToListAsync());
         }

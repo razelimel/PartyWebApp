@@ -13,7 +13,7 @@ namespace PartyWebApp.Models
         public string address { get; set; }
         public string city { get; set; }
         public string maxCapacity { get; set; }
-        public List<string> imageUrl;
+        public List<string> imagesUrl;
 
         //[NotMapped]
        /*public string[] imagesUrl
