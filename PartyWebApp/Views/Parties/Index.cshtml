@@ -4,56 +4,41 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Parties</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-primary">Create New Party</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.eventDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.minimalAge)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.eventDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.minimalAge)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<form asp-controller="Parties" asp-action="Index">
+    <p>
+        Name: <input type="text" name="SearchString" autocomplete="off" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+        <div class="card col-4" style="width: 18rem;">
+            <img height="250" src=@Html.DisplayFor(modelItem => item.imageUrl)
+                 class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title">@item.name</h4>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    @Html.DisplayFor(modelItem => item.club) <br />
+                    @Html.DisplayFor(modelItem => item.genre)
+                </h6>
+                @*  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> *@
+                <div class="d-grid gap-2  row-3 ">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary btn-lg">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary btn-lg">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary btn-lg">Delete</a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+

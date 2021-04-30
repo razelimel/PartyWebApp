@@ -13,8 +13,10 @@ namespace PartyWebApp.Models
         public string address { get; set; }
         public string city { get; set; }
         public string maxCapacity { get; set; }
-        [NotMapped]
-        public string[] imagesUrl
+        public List<string> imagesUrl;
+
+        //[NotMapped]
+       /*public string[] imagesUrl
         {
             get
             {
@@ -26,5 +28,6 @@ namespace PartyWebApp.Models
             }
         }
         public string imagesUrlDTO { get; set; }
+       */
     }
 }
